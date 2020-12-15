@@ -183,7 +183,7 @@ ls -l
 
   **Aplicado a cada uno de los permisos disponibles:**
 
-  **Dueño**--------------**Grupo**------------  **Otros**
+  **Dueño**----------**Grupo**----------**Otros**
 
   |  r   |  w   |  x   |  r   |  w   |  x   |  r   |  w   |  x   |         |
   | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :-----: |
