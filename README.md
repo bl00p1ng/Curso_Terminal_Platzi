@@ -1,5 +1,7 @@
 # Curso de Introducción a la Terminal y Línea de Comandos
 
+Apuntes del [Curso de Introducción a la Terminal y Línea de Comandos](https://platzi.com/clases/terminal/)
+
 ## - Los Comandos
 
 - **Nombre de un programa**
@@ -120,4 +122,22 @@ ls -lh | more
     killall proccess # Hace lo mismo que el anterior sólo que en lugar del PID toma por argumento el nombre del archivo ejecutable que genera el proceso
     ```
 
-    
+## - Permisos sobre archivos:
+
+- **Dueño:** la persona que creo el archivo.
+- **Grupo:** usuarios que pueden acceder a ese archivo.
+- **Otros:** que puede hacer con el archivo cualquier otro que no sea el dueño ni este en el grupo.
+
+### Permisos:
+
+Se consultan con:
+
+```bash
+ls -l
+```
+
+
+
+- **Lectura** ➡ r
+- **Escritura** ➡ w
+- **Ejecución** (depende de si el archivo es ejecutable) ➡ x
