@@ -51,4 +51,73 @@ tail -n 5 filename.txt # Mostrar las últimas x líneas de un archivo
   awk -F ';' 'NR > 1 && $3 > 0 { print $1, $3 * $4 }' # NR número de la columna.
   ```
 
-  
+## - Flujos estándar
+
+Son los canales por donde se ingresan y salen datos de un proceso.
+
+- **Entrada**
+- **Salida**
+- **Error**
+
+### Redirección
+
+Cambiar el flujo estándar(entrada/salida) de un archivo (por default el teclado) a una opción distinta como por ejemplo un archivo.
+
+```bash
+command < file.txt # Redirecciona file.txt al comando especificado. (Redireccionar entrada)
+ls > output.txt # Redirecciona la salida del comando a un archivo
+ls -l >> file.txt # Redireccionar la salida del comando al final de un archivo ya existente.
+```
+
+### Pipes
+
+Tomar la salida de un proceso y pasarsela como entrada a otro
+
+```bash
+ls -lh | more
+```
+
+## - Administración de procesos en background y foreground
+
+- ### Correr procesos en segundo plano:
+
+  Permite correr en segundo plano comandos cuya ejecución tarde un tiempo considerable, para poder así seguir usando la terminal minetras ese proceso se ejecuta.
+
+  ```bash
+  curl "https://releases.ubuntu.com/20.04.1/ubuntu-20.04.1-desktop-amd64.iso" $ # $ indica que se proceso se ejecute en segundo plano
+  ```
+
+  **Ctrl + Z** ➡ Enviar un comando al background
+
+  ```bash
+  fg # Recuperar el comando (mandarlo al foreground)
+  ```
+
+- ### Ver procesos que se estan ejecutando:
+
+  - **ps:**
+
+    Utilidad Batch para monitorear procesos
+
+    ```bash
+    ps # Procesos que YO estoy ejecutando
+    ps ax # Procesos que estoy ejecutando YO y el SISTEMA
+    ```
+
+    
+
+  - **top:**
+
+    Utilidad interactiva para monitorear procesos y recursos del sistema
+
+- ### Matar procesos:
+
+  - Obtener identificador (PID) usando **ps** 
+
+    ```bash
+    kill -9 127 # -9 Indica que el proceso debe finalizar inmediatamente
+    
+    killall proccess # Hace lo mismo que el anterior sólo que en lugar del PID toma por argumento el nombre del archivo ejecutable que genera el proceso
+    ```
+
+    
