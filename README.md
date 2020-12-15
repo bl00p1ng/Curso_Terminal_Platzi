@@ -73,7 +73,7 @@ ls -l >> file.txt # Redireccionar la salida del comando al final de un archivo y
 
 ### Pipes
 
-Tomar la salida de un proceso y pasarsela como entrada a otro
+Toman la salida de un proceso y se la pasan como entrada a otro
 
 ```bash
 ls -lh | more
@@ -138,6 +138,72 @@ ls -l
 
 
 
-- **Lectura** ➡ r
-- **Escritura** ➡ w
-- **Ejecución** (depende de si el archivo es ejecutable) ➡ x
+- **Lectura** → r
+
+- **Escritura** → w
+
+- **Ejecución** (depende de si el archivo es ejecutable) → x si es un directorio esta letra indica que se puede acceder a ese directorio.
+
+- **d** → Indica que es un directorio
+
+- **l** → Link. Es un puntero a otro archivo.
+
+  Un - en los permisos significa que dicho permiso no esta disponible para dicho usuario, grupo u otros.
+
+  **Ejemplo:**
+
+  ```bash
+  ls -l
+  -rwxrwxrwx 1 blooping blooping    4390 Dec 15 11:29 README.md # En este caso la d esta excluida por lo que se trata de un archivo. El dueño tiene permisos de lectura, escritura y ejecución, al igual qu el grupo y los otros usuarios.
+  
+  # El primer conjunto de permisos son los del dueño, los otros son son los del grupo y los últimos son los permisos de cualquier otro usuario
+  ```
+
+  ### Modificar permisos:
+
+  - **chmod:** es el más utilizado, se usa para cambiar el modo del archivo. Permite cambiar individualmente los permisos.
+
+  - **chown:** cambia al usuario propietario de ese archivo.
+
+  - **chgrp:** cambia el grupo de usuarios que puede acceder a ese archivo.
+
+    ```bash
+    chmod o-w file.txt # o → Indica que el cambio afectara a los otros usuarios que accedan a ese archivo. - → indica que se quiere quitar un permiso. w → es el permiso a quitar
+    
+    chmod +x backend.php # Al no especificar a quien afectaran los cambios, el permiso se otorga a todos los que tengan acceso al archivo. + → Inidca que se quiere añadir un permiso. x → el permiso que se quiere añadir
+    ```
+
+  ### Notación binaria:
+
+  |  r   |  w   |  x   |       |
+  | :--: | :--: | :--: | :---: |
+  |  1   |  0   |  0   | **4** |
+  |  1   |  1   |  0   | **6** |
+  |  1   |  1   |  1   | **7** |
+
+  **Aplicado a cada uno de los permisos disponibles:**
+
+  **Dueño**                          **Grupo**                          **Otros**
+
+  |  r   |  w   |  x   |  r   |  w   |  x   |  r   |  w   |  x   |         |
+  | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :-----: |
+  |  1   |  1   |  0   |  1   |  0   |  0   |  0   |  0   |  0   | **640** |
+  |  1   |  0   |  0   |  0   |  0   |  0   |  0   |  0   |  0   | **400** |
+  |  1   |  1   |  1   |  1   |  1   |  1   |  1   |  1   |  1   | **777** |
+
+  Esto se usa para hacer un cambio de todos los permisos (dueño, grupo, otros) en una sola operación.
+
+  ```bash
+  chmod 760 file.txt # 7 → El dueño tiene todos los permisos. 6 → El grupo no tiene permiso para ejecutar. 0 → Los otros usuarios no tienen ningún permiso sobre el archivo.
+  ```
+
+  El usuario **root** tiene permisos para prácticamente leer y escribir cualquier archivo del sistema. El comando **sudo** se usa para tener temporalmente permisos como usuario root.
+
+  ```bash
+  sudo chown www-data backend.php # Cambia el dueño del archivo por www-data
+  
+  sudo chgrp www-data backend.php # Cambia el grupo del archivo por www-data
+  ```
+
+  
+
