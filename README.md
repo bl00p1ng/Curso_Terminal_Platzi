@@ -207,3 +207,84 @@ ls -l
 
   
 
+## - Manejo de Paquetes
+
+**Administradores de paquetes:** simplifican el proceso de instalación de software. Reúnenfuentes para obtener paquetes de software y automatizan la tarea de descargar el software, moverlo a los directorios donde se encuentran los archivos ejecutables y configurar el software (añadir al PATH en las variables de entorno del sistema, instalar dependencias, etc). **Ejemplos de administradores de paquetes:**
+
+- **apt:** Debian y derivadas  como Ubuntu.
+- **zypper:** Suse Linux y derivadas.
+- **rpm:** Fedora, RHEL y derivadas.
+- **pacman:** Arch Linux y derivadas.
+
+### Usando apt
+
+```bash
+sudo apt install lynx # sudo → otorga permisos root. apt install → indica que se quiere usar apt para instalar un programa; otras posibles opciones son update para refrescar las bases de datos de los repositorios de softare y remove para desinstalar un paquete. lynx → es el paquete a instalar
+```
+
+- **Paquetes binarios:** paquetes con binarios listos para ejecutarse.
+
+- **Paquetes de lenguajes:** librerías y utilidades hechas para trabajar con determinado lenguaje. **Ejemplos:**
+  - **pip:** Package Installer for Python. Gestor de paquetes y dependencias para Python.
+  - **npm:** Node Package Manger. Gestor de paquetes y dependencias para  NodeJs.
+  - **composer:** Gestor de paquetes y dependencias para PHP.
+
+## - Herramientas de compresión y combinación de archivos
+
+- **Comprimir archivos:**
+
+  ```bash
+  gzip db.sql # Creará un archivo comprimido con extención .gz
+  gzip -d db.spl.gz # -d → indica que se quiere descomprimir el archivo.
+  ```
+
+- **Combinar archivos:**
+
+  ```bash
+  tar cf backup.tar backup/* # cf → (Create File) Indica que se va a crear un archivo. backup.tar → nombre del archivo donde se van a agrupar los demás. backup/* → Indica donde estan los archivos que se van a combinar
+  
+  tar tf backup.tar # tf → Visualizar el contenido que esta dentro del .tar
+  
+  tar xf backup.tar # xf → Desagrupar el archivo .tar
+  ```
+
+  **NOTA:** tar agrupa/combina los archivos, *NO* los comprime por defecto. Si se quiere agrupar y comprimir se usa el siguiente comando:
+
+  ```bash
+  tar czf backup.tgz backup/* # czf → comprimir el archivo usando gzip¨. backup.tgz → nombre del archivo donde se van a agrupar y comprimir los demás. backup/* → Indica donde estan los archivos que se van a combinar y comprimir
+  
+  tar xzf backup.tgz # Desagrupar y descomprimir el archivo
+  ```
+
+  
+
+## - Herramientas de búsqueda de archivos
+
+Principales herramientas para búsqueda de archivos:
+
+- **locate:** permite buscar el archivo que se le especifique en todo el sistema de archivos. Funciona mediante una base de datos que se tiene que actualizar periódicamente.
+
+  ```bash
+  locate file.txt # Buscar el archivo
+  sudo upadatedb # actualizar base de datos
+  ```
+
+  
+
+- **whereis:** se usa para ubicar archivos binarios (comandos). Retorna el directorio donde esta guardado el ejecutable de un comando.
+
+  ```bash
+  whereis echo
+  ```
+
+- **find:** es la herramienta de búsqueda más completa y la vez la más compleja. Busca dentro del árbol de directorios que se le especifique usando una serie de criterios. **Ejemplos:**
+
+  ```bash
+  find . -user blooping -perm 644 ## . → Busca en el directorio actual. -user → busca los archivos que corresponden a ese usuario. -perm → busca los archivos que tengan esos permisos.
+  
+  find . -type f -mtime +7 # -type → buscar por tipo. f → establece el tipo para buscar sólo archivos. -mtime → buscar archivos que fueron modificados en cierto intervalo de tiempo. +7 → establece el intervalo de tiempo en más de 7 días.
+  
+  find . -type f -mtime +7 -exec cp {} ./backup \; # -exec → establece acciones a ejecutar con el(los) archivo(s) encontrado(s). {} → representa el(los) nombre(s) de el(los) archivo(s) encontrado(s). \; → indica el final del comando.
+  ```
+
+  
