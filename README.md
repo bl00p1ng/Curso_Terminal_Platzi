@@ -356,4 +356,88 @@ echo $PATH # $ → Le indica al interprete de comandos que expanda el contenido 
     export VAR=valor # VAR → Nombre de la variable.
     ```
 
+
+## - Cómo y para qué escribir scripts en Bash
+
+**Bash** no sólo es un interprete de comandos, también es un leguaje de programación, su extención es **.sh**. Esto permite ejecutar múltiples comandos con sólo correr un script facilitando enormemente la automatización de tareas.
+
+```bash
+#!/bin/bash #Indica cuál es el interpete de comandos que va a ejecutar el script.
+
+mkdir /tmp/wordpress
+tar czf /tmp/wordpress/wordpress.`date +%F`.tgz /usr/share/nginx/wordpress # `date +%F → Toma la salida del comando date y la agrega al nombre del archivo
+mv /tmp/wordpress.`date +%F`.tgz /root/backups/
+rmdir /tmp/wordpress
+```
+
+- Se pueden ejecutar scripts desde un archivo bash:
+
+```bash
+/root/backup_db.sh
+/root/backup_core.sh
+```
+
+- Sintaxis básica de Bash Scripting.
+
+```bash
+#!/bin/bash
+
+NEW_DIR=hello # Crear variables
+
+if [ ! -d "/root/$NEW_DIR" ]; then # Crear condicional. -d → Verifica si existe el directorio
+	mkdir /root/$NEW_DIR
+fi # fi finaliza el if
+
+cp backup_code.sh /root/$NEW_DIR/
+echo "`date`: Todo listo!"
+```
+
+- Ejecutar Script:
+
+  ```bash
+  chmod u+x platzi.sh # Otorgar permisos de ejecución
+  ./platzi.sh # Ejecutar el script
+  ```
+
+- Archivos de configuración de interprete de comandos. Se abren cada vez que se inicia sesión:
+
+  - **/etc/environment:** definición de la variable $PATH
+
+  - **.bashrc:** archivo de configuración de bash
+
+    ```bash
+    export PATH=$PATH:/home/platzi/ # Agregar directorio al PATH. Esto se pone en el archivo .bashrc
     
+    source .bashrc # Refrescar el archivo en el sistema para tomar los cambios
+    ```
+
+    
+
+## - Cómo y para qué dejar tareas programadas
+
+Para programar tareas hay dos opciones:
+
+- **at:** permite programar comandos tomando como referencia la fecha y hora actual.
+
+  ```bash
+  at now +2 minutes # Las tareas se ejectaran en 2 minutos contando desde ahora. Al ejecutar el comando se abre otro prompt donde se pueden poner todos los comandos que se quieren programar. Ctrl + d → Finalizar la programación de tareas
+  ```
+
+  Si el comando no funciona y arroja el error: *Can’t open /var/run/atd.pid to signal atd. No atd running?* Hay que iniciar los servicios de at y cron. Par ello hay que ejecutar lo siguiente:
+
+  ```bash
+  service --status # Revisar si los servicios estan activos
+  sudo service atd start # Activar at
+  sudo service cron atd # Activar cron
+  ```
+
+  
+
+- **cron:** permite dejar comandos programados para que se ejecuten de forma periódica. Utiliza un archivo llamando **crontab**
+
+  ```bash
+  crontab -e # Permite ver la tareas que estan programadas y programar nuevas tareas.
+  
+  45 12 * * * echo "hola" > hola.txt # Primer valor → Minuto. Segundo Valor → Hora. Tercer valor → Día del mes. Cuarto valor → Mes. Quinto valor → Día de la semana. Sexto valor → Comando a ejecutar
+  ```
+
