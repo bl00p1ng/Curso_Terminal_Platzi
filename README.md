@@ -288,3 +288,27 @@ Principales herramientas para búsqueda de archivos:
   ```
 
   
+
+- ## Herramientas para interactuar a través de HTTP
+
+  Dicho intercambio entre el PC y el servidor se puede dar mediante dos comandos:
+
+  - **curl:** se utiliza para hacer *"pedidos crudos"*. Se hace la petición al servidor, se recibe la respuesta en HTTP y se muestra en la pantalla.
+
+    ```bash
+    curl https://platzi.com # Descarga el código HTML de la página solicitada.
+    
+    curl -v https://platzi.com | more # -v → muestra además del HTML la interacción por HTTP con el servidor.
+    
+    curl -v https://platzi.com > /dev/null # Mostrar sólo los encabezados HTTP
+    ```
+
+    
+
+  - **wget:** es una herramienta un poco más compleja que realiza descargas a un servidor HTTP.
+
+    ```bash
+    wget https://www.php.net/distributions/php-7.3.10.tar.bz2
+    ```
+
+    
