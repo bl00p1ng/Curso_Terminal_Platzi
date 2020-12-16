@@ -311,4 +311,22 @@ Principales herramientas para búsqueda de archivos:
     wget https://www.php.net/distributions/php-7.3.10.tar.bz2
     ```
 
-    
+## - Acceso seguro a otras computadoras
+
+Al conectarse de forma segura los comandos no viajan como texto plano, si no que son encriptados para evitar que cualquier agente malicioso interfiera. Para hacer eso se usa el comando **ssh** (Secure Shell)
+
+```bash
+ssh leeway-prod # leeway-prod → perfil de ssh predefinido. Dichos perfiles se definen en el archivo ~/.ssh/config. Ejemplo de configuración:
+Host leewat-prod
+	HostName 45.55.62.127
+	User root
+```
+
+- **Enviar emails a través de la terminal:**
+
+  ```bash
+  echo "Hello World!" | mail -s "Test" human@example.com # -s → Define el asunto del email. 
+  ```
+
+  
+
