@@ -330,3 +330,30 @@ Host leewat-prod
 
   
 
+## - Qué son y cómo se utilizan las variables de entorno
+
+Es una definición global a la que todos los procesos tienen acceso para tener más información sobre el entorno en el que se esta trabajando, esa información puede ser cosas como el **PATH** que es una variable que almacena las rutas de los directorios que contienen archivos binarios que se pueden ejecutar desde la terminal.
+
+Para ver las rutas que almacena esa esa variable se usa el comando:
+
+```bash
+echo $PATH # $ → Le indica al interprete de comandos que expanda el contenido de esa variable.
+```
+
+- ### Asignar variables de entorno:
+
+  - **Para un comando:** crear una variable para el próximo comando que se va a ejecutar. No es muy común hacer esto puede ser útil para sobrescribir una variable sin que esto afecte a todos los comandos.
+
+    ```bash
+    VAR=valor commnad # command → Comando al que va a afectar dicha variable
+    ```
+
+     
+
+  - **Para toda la sesión:** crea una asignación global
+
+    ```bash
+    export VAR=valor # VAR → Nombre de la variable.
+    ```
+
+    
